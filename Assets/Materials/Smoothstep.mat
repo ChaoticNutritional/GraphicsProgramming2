@@ -22,6 +22,6 @@ Material:
     m_Floats:
     - _HighEdge: 0.6
     - _LowEdge: 0.3
-    - _LowerEdge: 0.275
-    - _UpperEdge: 0.568
+    - _LowerEdge: 0.24
+    - _UpperEdge: 1
     m_Colors: []

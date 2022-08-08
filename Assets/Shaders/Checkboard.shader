@@ -2,12 +2,15 @@
 {
     Properties
     {
+        _Frequency("Frequency", Range(1, 1000)) = 1
     }
 
     SubShader
     {
         Tags { "RenderType" = "Opaque" }
         LOD 100
+
+
 
         Pass
         {
@@ -16,6 +19,10 @@
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+
+            static const float PI = 3.14159265f;
+            static const float PI_2 = PI*2;
+
 
             struct appdata
             {
@@ -29,8 +36,11 @@
                 float4 vertex : SV_POSITION;
             };
 
+            float _Frequency;
+
             v2f vert (appdata v)
             {
+                v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 return o;
@@ -38,7 +48,7 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
-
+                return sin(i.uv.y * PI_2 * _Frequency) * sin(i.uv.x * PI_2 * _Frequency) > 0;
             }
 
             ENDCG

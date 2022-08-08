@@ -2,6 +2,8 @@
 {
     Properties
     {
+        _LowerEdge("Low Edge", Range(0,1)) = 0
+        _UpperEdge("Upper Edge", Range(0,1)) = 1
     }
 
     SubShader
@@ -32,6 +34,9 @@
                 float4 vertex : SV_POSITION;
             };
 
+            float _LowerEdge;
+            float _UpperEdge;
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -43,6 +48,7 @@
             fixed4 frag(v2f i) : SV_Target
             {
                 //smoothstep function as color
+                return smoothstep(_LowerEdge, _UpperEdge, i.uv.y);
             }
             ENDCG
         }

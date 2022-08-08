@@ -2,6 +2,7 @@
 {
     Properties
     {
+        _EdgeThreshold("Step Thresh", Range(0,1)) = 0.5
     }
 
     SubShader
@@ -32,6 +33,8 @@
                 float4 vertex : SV_POSITION;
             };
 
+            float _EdgeThreshold;
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -42,7 +45,7 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
-                //step function as color
+                return step(_EdgeThreshold, i.uv.x);
             }
             ENDCG
         }

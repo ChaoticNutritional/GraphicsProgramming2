@@ -2,6 +2,7 @@
 {
     Properties
     {
+        _Power("Power", Range(1,10)) = 1
     }
 
     SubShader
@@ -41,7 +42,7 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
-                //use pow function as color
+                return pow(1.0f - length(float2(0.5, 0.5) - i.uv), _Power);
             }
             ENDCG
         }
