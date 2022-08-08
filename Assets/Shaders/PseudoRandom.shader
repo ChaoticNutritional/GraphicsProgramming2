@@ -25,6 +25,11 @@
                 float4 vertex : SV_POSITION;
             };
 
+            float random(float2 v)
+            {
+                return frac(sin(dot(v.xy, float2(12.9898, 78.233))) * 43758.5453123);
+            }
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -36,6 +41,7 @@
             fixed4 frag(v2f i) : SV_Target
             {
                 //use random as color
+                return float4(random(i.uv + _Time.x), random(i.uv + 10.0f + _Time.x), random(i.uv + 100.f + _Time.x), 1);
             }
             ENDCG
         }
