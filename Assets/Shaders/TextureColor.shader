@@ -3,6 +3,7 @@
     //pass a texture as a uniform property
     Properties
     {
+        _MainTex("Main Texture", 2D) = "white" {}
     }
 
     SubShader
@@ -30,6 +31,8 @@
                 float4 vertex : SV_POSITION;
             };
 
+            sampler2D _MainTex;
+            float4 _MainTex_ST; //the "ST" tells Unity to populate with a Scale and Tile variable
 
             v2f vert (appdata v)
             {
@@ -37,13 +40,15 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
                 //Apply the automatic texture scale and offset to the uv
-
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
                 // sample the texture using the hlsl function and the uv coordinate from the mesh
+                float4 color = tex2D(_MainTex, i.uv);
+                return color;
             }
             ENDCG
         }
