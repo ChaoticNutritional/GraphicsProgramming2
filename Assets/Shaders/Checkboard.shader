@@ -37,6 +37,7 @@
             };
 
             float _Frequency;
+            float _SinRnage;
 
             v2f vert (appdata v)
             {
