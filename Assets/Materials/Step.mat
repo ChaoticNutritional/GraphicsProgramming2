@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _EdgeThreshold: 0.584
+    - _EdgeThreshold: 0.53
     - _Frequency: 1
     - _StepThreshold: 0.5
     m_Colors: []

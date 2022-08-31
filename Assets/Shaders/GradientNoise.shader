@@ -32,7 +32,7 @@
             }
 
 
-            //a static variable of an 4 unit length array of float 2's'
+            //a static variable of an 4 unit slength array of float 2's'
             //one for each grid direction
             static const float2 s_dirs[4] = { 
                 float2(0.0, 0.0),

@@ -10,6 +10,7 @@ Shader "Custom/ProceduralTexturing"
         _Octaves("Octaves", Int) = 5
         _Color1("Color 1", Color) = (1,0,0,1)
         _Color2("Color 2", Color) = (0,0,1,1)
+        _Speed("Speed", Float) = 1
     }
 
     SubShader
@@ -36,6 +37,7 @@ Shader "Custom/ProceduralTexturing"
         float4 _ScaleAndOffset;
         float4 _Color1;
         float4 _Color2;
+        float _Speed;
 
         float remap(float v, float a1, float a2, float b1, float b2)
         {
@@ -109,14 +111,14 @@ Shader "Custom/ProceduralTexturing"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Use Noise to create surface colors
-            float n = octaveNoise(IN.uv_MainTex);
+            float n = octaveNoise(IN.uv_MainTex + _Time.x);
 
             //use the noise value to lerp between two colors
-            fixed4 newColor = lerp(_Color1, _Color2, n);
+            fixed4 newColor = sin(lerp(_Color1, _Color2, n));
             o.Albedo = newColor.rgb;
             o.Alpha = 1.0f;
 
-            o.Metallic = smoothstep(0.3f, 0.0f, n);
+            o.Metallic = n;
             o.Smoothness = remap(n, 0.0, 1.0, 0.23, 1.0);
             o.Emission = smoothstep(0.5, 0.0, n) * _Color1;
 
